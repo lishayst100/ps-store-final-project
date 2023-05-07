@@ -1,0 +1,71 @@
+
+
+.welcome{
+        font-size: 60px;
+}
+
+.desc{
+        font-size: 40px;
+}
+
+.a-link{
+        color: #169fe6;
+        cursor: pointer;
+}
+
+.underline{
+        color: #169fe6;
+}
+.button{
+        background-color:  #169fe6;
+        border-radius: 10px;
+        transform: scale(1.5);
+}
+
+.slide-right {
+        animation: slide-right 1s cubic-bezier(.25, .46, .45, .94) both;
+
+        
+}
+
+
+
+.ps-img{
+
+}
+
+
+@keyframes slide-right {
+        0% {
+                opacity: 0.1;
+                transform: translateX(-150px)
+        }
+        50% {
+                opacity: 0.5;
+        }
+
+        100% {
+        opacity: 1;
+                transform: translateX(0px)
+        }
+}
+
+
+.slide-left {
+        animation: slide-left 1s cubic-bezier(.25, .46, .45, .94) both
+}
+
+@keyframes slide-left {
+        0% {
+                opacity: 0.1;
+                transform: translateX(100px)
+        }
+
+        50%{
+                opacity: 0.5;     
+        }
+        100% {
+                opacity: 1;
+                transform: translateX(0)
+        }
+}
