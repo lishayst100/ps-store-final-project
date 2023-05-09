@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 
 
 function MainNavbar() {
-     const { CartTotalQuantity } = useSelector((state) => state.cart);
+     const cart = useSelector((state) => state.cart);
      const { isLoggedIn, logout, isAdmin } = useContext(AuthContext);
      const [navber, setNavber] = useState(false)
      const nav = useNavigate()
@@ -75,7 +75,7 @@ function MainNavbar() {
                   <NavLink className="nav-link" to="/cart">
                     <BsCart2 size={"2rem"} />
                     <span>
-                      <span>{CartTotalQuantity}</span>
+                      <span>{cart.CartTotalQuantity}</span>
                     </span>
                   </NavLink>
                 </Nav>
