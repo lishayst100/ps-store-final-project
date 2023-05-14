@@ -13,6 +13,9 @@ import _ from 'underscore';
 import { validateToken } from "../middleware/validateToken.js";
 import { isAdmin } from "../middleware/isAdmin.js";
 const router = Router();
+router.get("/", (req, res) => {
+    res.json("hpme");
+});
 router.get('/allgames', (req, res) => {
     Game.find()
         .then((result) => res.json(result))
@@ -71,4 +74,9 @@ router.get("/details/:id", (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.send({ message: "no such Game" });
     }
 }));
+router.post("/order", (req, res) => {
+    const jsonOrder = req.body;
+    const data = JSON.parse(jsonOrder);
+    console.log(data);
+});
 export { router as gamesRouter };

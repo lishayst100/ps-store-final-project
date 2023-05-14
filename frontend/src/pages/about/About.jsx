@@ -6,7 +6,7 @@ import WhyYouShould from '../../components/whyYouShould/WhyYouShould';
 
 
 const About = () => {
-
+  window.scroll(0, 0);
   return (
     <div>
       <h2 className="slide-in-top">About Us</h2>

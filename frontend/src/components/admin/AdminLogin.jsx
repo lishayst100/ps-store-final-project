@@ -49,7 +49,7 @@ const AdminLogin = () => {
         }}
       >
         <Form className="bg-light text-dark d-flex gap-2 flex-column align-items-center mx-auto bg-light rounded-5  p-4 shadow-lg text login-container">
-          <h3>Login:</h3>
+          <h3>Admin Login:</h3>
           <div className=" d-flex flex-column align-items-start justify-content-center gap-2 inputs">
             <label htmlFor="email" className="font-bolder">
               Email:

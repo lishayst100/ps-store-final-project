@@ -15,28 +15,46 @@ const Payment = () => {
     const nav =useNavigate()
     const dispatch = useDispatch()
 
-    const handlePayment = () => {
-       dispatch(clearCart()); 
-       Swal.fire('Thank you For Purchase In Our Store','','success')
-       setTimeout(()=>{nav('/')}, 3000)
+    
+
+    const handlePayment = (formValues) => {
+      const order = cart.cartItems
+      const aaa = 'asdsd'
+      
+
+      const jsonOrder = JSON.stringify(order)
+
+       fetch("http://localhost:3001/api/games/order", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: aaa
+       }).then(res => res.json)
+       .catch(e => console.log(e))
     
         
     };
 
 
+    console.log(cart.cartItems);
+
+
   return (
     <div className="containerr">
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handlePayment}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handlePayment}
+      >
         <Form
           className="bg-light p-4 font-bolder rounded-2 d-flex flex-column gap-3"
           novalidate
         >
-          
           <div className="card-number d-flex flex-column align-items-start needs-validation">
             <label htmlFor="validationCustom01">Card Number</label>
             <Field
               name="creditCardNumber"
               type="text"
+              
               className="form-control"
               id="creditCardNumber"
             />
@@ -108,6 +126,18 @@ const Payment = () => {
           </button>
 
           <div>Total Price: {cart.CartTotalAmount}$</div>
+          <div>
+            Your Order :
+            <div className='d-flex gap-3'>
+              {cart.cartItems.map((game) => (
+                <div key={game._id} className='shadow-lg'>
+                  <p>{game.title}</p>
+                  <p>{game.cartQuantity}</p>
+                  <img src={game.frontImage} alt="" />
+                </div>
+              ))}
+            </div>
+          </div>
         </Form>
       </Formik>
     </div>

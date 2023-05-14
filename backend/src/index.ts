@@ -11,6 +11,7 @@ import { orderRouter } from './routes/order.js'
 
 
 
+
 const app = express()
 connect().catch(e => console.log(e))
 
@@ -29,6 +30,7 @@ app.get('/api/login' , login)
 app.use( '/api/games', gamesRouter)
 app.use('/api/carusel' , caruselRouter)
 app.use('api/users', AuthRouter )
+app.use('api/orders', orderRouter)
 
 
 

@@ -109,11 +109,11 @@ const ListGames = () => {
               setShowFilters(!showFilters);
             }}
           >
-            More Filters
+            {showFilters ? 'Less Filters' : 'More Filters' }
           </button>
         </div>
-        {showFilters && (
-          <div className="scale-up-ver-top">
+        <div className={showFilters ? 'wrapper open' : 'wrapper'}>
+          <div className="expandable">
             <label htmlFor="" className="font-bolder">
               Sort Or Filter By
             </label>
@@ -160,11 +160,11 @@ const ListGames = () => {
               </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
       {isLoadding && <ColorRing />}
       <div className="row gap-2">
-        {games && (
+        {games &&
           games.map((game) => (
             <div
               className=" shadow cardGame col-lg-3 col-sm-6 container p-3 rounded mt-4 "
@@ -220,9 +220,8 @@ const ListGames = () => {
                 </div>
               </div>
             </div>
-          ))
-        )}
-        {games.length === 0 && (<NoGameFound/>)}
+          ))}
+        {games.length === 0 && <NoGameFound />}
       </div>
     </div>
   );

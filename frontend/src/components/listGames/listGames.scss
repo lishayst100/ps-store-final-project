@@ -67,3 +67,21 @@
         transform-origin: 100% 0%;
     }
 }
+
+
+.wrapper{
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 300ms;
+}
+
+.expandable{
+    min-height: 0;
+}
+
+ .open{
+    grid-template-rows: 1fr;
+    
+}
+

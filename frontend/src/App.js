@@ -21,6 +21,8 @@ import NotFound from "./components/not found/NotFound";
 
 
 function App() {
+
+
   return (
     <div className="App">
       <MainNavbar />

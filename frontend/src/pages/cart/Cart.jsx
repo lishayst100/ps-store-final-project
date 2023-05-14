@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import './Cart.scss'
 
 const Cart = () => {
+    window.scroll(0, 0);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();

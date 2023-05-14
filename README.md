@@ -10,7 +10,6 @@ when the admin can add/edit/delete games from the store using http request
 
 
  Before you start checking my project there are some instructions on how to run the site
- First of all command in the terminal npm i
  1. command cd backend and command npm i 
  2. command npm run tsw (its compaling the ts to js)
  3. open a new terminal at the backend folder and command npm run dev (it should connect the server to the Database)
