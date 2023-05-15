@@ -16,6 +16,7 @@ const GetGames = () => {
     const getGames = () =>{
     fetch('http://localhost:3001/api/games/admin', {
       headers: { 'Authorization': localStorage.getItem("token") },
+      
     })
       .then((res) => res.json())
       .then((result) => setGames(result))

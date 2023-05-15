@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-
+/* 
 const cartItem = new Schema({
   title: String,
   description: String,
@@ -14,12 +14,17 @@ const cartItem = new Schema({
   cartQuantity: Number,
   __v: Number,
   _id: Number
-});
+}); */
 
 
 const order = new Schema({
   creditCardName: String,
-  orderDetails: [cartItem]
+  orderDetails: Array,
+  CartTotalAmount:Number,
+  address: String,
+  username:String,
+  email:String,
+  
 });
 
 

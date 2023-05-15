@@ -12,6 +12,7 @@ import { Game } from "../db/models/gameModel.js";
 import _ from 'underscore';
 import { validateToken } from "../middleware/validateToken.js";
 import { isAdmin } from "../middleware/isAdmin.js";
+import { Order } from "../db/models/order.js";
 const router = Router();
 router.get("/", (req, res) => {
     res.json("hpme");
@@ -75,8 +76,24 @@ router.get("/details/:id", (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 router.post("/order", (req, res) => {
-    const jsonOrder = req.body;
-    const data = JSON.parse(jsonOrder);
-    console.log(data);
+    const body = _.pick(req.body, "creditCardName", "orderDetails", "address", "CartTotalAmount", 'username', "email");
+    new Order(body)
+        .save()
+        .then((result) => res.json({ message: "Order Completed" }))
+        .catch((e) => res.json({ error: `${e}` }));
+});
+router.get('/allOrders', validateToken, isAdmin, (req, res) => {
+    Order.find()
+        .then((result) => res.json(result))
+        .catch((e) => res.json({ error: `${e}` }));
+});
+router.delete('/deleteOrder/:id', validateToken, isAdmin, (req, res) => {
+    Order.deleteOne({ _id: req.params.id })
+        .then((result) => res.json({ message: "Order Completed" }))
+        .catch((e) => res.json({ error: `${e}` }));
+});
+router.get('/userOrder/:username', (req, res) => {
+    Order.findOne({ username: req.params.username })
+        .then(result => res.json(result));
 });
 export { router as gamesRouter };

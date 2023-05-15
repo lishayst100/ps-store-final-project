@@ -18,24 +18,33 @@ const Payment = () => {
     
 
     const handlePayment = (formValues) => {
-      const order = cart.cartItems
-      const aaa = 'asdsd'
-      
-
-      const jsonOrder = JSON.stringify(order)
+      const body = {
+        creditCardName: formValues.creditCardName,
+        username: JSON.parse(localStorage.getItem("user")).username,
+        email: JSON.parse(localStorage.getItem("user")).email,
+        orderDetails: cart.cartItems,
+        CartTotalAmount: cart.CartTotalAmount,
+        address: formValues.address
+      };
 
        fetch("http://localhost:3001/api/games/order", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
-         body: aaa
-       }).then(res => res.json)
-       .catch(e => console.log(e))
+         body: JSON.stringify(body),
+       })
+         .then((res) => res.json)
+         .then(()=>{
+          Swal.fire('Thank you for your purchase!!!','','success')
+          dispatch(clearCart())
+          nav('/')
+         })
+         .catch((e) => console.log(e));
     
         
     };
 
 
-    console.log(cart.cartItems);
+  
 
 
   return (
@@ -47,14 +56,13 @@ const Payment = () => {
       >
         <Form
           className="bg-light p-4 font-bolder rounded-2 d-flex flex-column gap-3"
-          novalidate
+          noValidate
         >
           <div className="card-number d-flex flex-column align-items-start needs-validation">
             <label htmlFor="validationCustom01">Card Number</label>
             <Field
               name="creditCardNumber"
               type="text"
-              
               className="form-control"
               id="creditCardNumber"
             />
@@ -113,7 +121,7 @@ const Payment = () => {
 
             <div className="cvc d-flex flex-column align-items-start">
               <label htmlFor="">Country</label>
-              <select name="country" className="form-select" id="" required>
+              <select name="country" className="form-select" required>
                 {countries.map((c) => (
                   <option>{c.name}</option>
                 ))}
@@ -121,22 +129,38 @@ const Payment = () => {
             </div>
           </div>
 
-          <button className="btn btn-primary" type="submit">
-            Pay Now
-          </button>
+          <div className="card-name d-flex flex-column align-items-start">
+            <label htmlFor="">Address</label>
+            <Field
+              name="address"
+              type="text"
+              className="form-control"
+              id="address"
+            />
+            <ErrorMessage
+              name="address"
+              component="div"
+              className="text-danger"
+            />
+          </div>
 
-          <div>Total Price: {cart.CartTotalAmount}$</div>
           <div>
-            Your Order :
-            <div className='d-flex gap-3'>
+            <h3>Your Order :</h3>
+            <div className="d-flex gap-3 justify-content-center flex-wrap">
               {cart.cartItems.map((game) => (
-                <div key={game._id} className='shadow-lg'>
+                <div key={game._id} className="shadow-lg p-3">
                   <p>{game.title}</p>
-                  <p>{game.cartQuantity}</p>
+                  
+                  <p>Quantity : {game.cartQuantity}</p>
+                  <p>Total Price : {game.price * game.cartQuantity}$</p>
                   <img src={game.frontImage} alt="" />
                 </div>
               ))}
             </div>
+            <div>Total Price: {cart.CartTotalAmount}$</div>
+            <button className="btn btn-primary" type="submit">
+              Pay Now
+            </button>
           </div>
         </Form>
       </Formik>

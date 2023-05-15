@@ -16,6 +16,12 @@ import AdminLogin from "./components/admin/AdminLogin";
 import MainNavbar from "./components/navbar/SecondaryNavbar";
 import Payment from "./components/payment/Payment";
 import NotFound from "./components/not found/NotFound";
+import ManageOrders from "./components/admin/ManageOrders";
+import OrderDetail from "./components/orderDetails/OrderDetail";
+import UserOrder from "./components/userOrder/UserOrder";
+
+
+
 
 
 
@@ -36,8 +42,11 @@ function App() {
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/addgame" element={<AddGame />} />
         <Route path="/admin" element={<GetGames />} />
+        <Route path="/admin/manageOrders" element={<ManageOrders />} />
+        <Route path="/admin/manageOrders/orderDetails/:_id" element={<OrderDetail />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/userOrder" element={<UserOrder />} />
         <Route path="admin/update/:_id" element={<EditGame />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

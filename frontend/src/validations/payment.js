@@ -5,7 +5,8 @@ import { creditcardNumberRegex, cvcRegex, fullnameRegex } from "./utils";
 export const initialValues = {
     creditCardNumber: '',
     CVC:'',
-    creditCardName:''
+    creditCardName:'',
+    address: ''
 }
 
 
@@ -28,4 +29,5 @@ export const validationSchema = yup.object({
     .string()
     .required("Full name is Required")
     .matches(fullnameRegex, "Please Enter Your Name"),
+    address: yup.string().required('Address is Required')
 });  

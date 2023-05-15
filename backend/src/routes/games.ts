@@ -106,11 +106,40 @@ router.get("/details/:id", async (req, res) => {
 });
 
 
+
 router.post("/order", (req, res) => {
-  const jsonOrder = req.body;
-  const data = JSON.parse(jsonOrder)
-  console.log(data);
+  const body = _.pick(
+    req.body,
+    "creditCardName",
+    "orderDetails",
+    "address",
+    "CartTotalAmount",
+    'username',
+    "email"
+  );
+  new Order(body)
+    .save()
+    .then((result) => res.json({ message: "Order Completed" }))
+    .catch((e) => res.json({ error: `${e}` }));
 });
 
+
+router.get('/allOrders', validateToken, isAdmin, (req,res)=> {
+  Order.find()
+    .then((result) => res.json(result))
+    .catch((e) => res.json({ error: `${e}` }));
+})
+
+router.delete('/deleteOrder/:id' ,validateToken,isAdmin, (req,res)=>{
+  Order.deleteOne({ _id: req.params.id })
+    .then((result) => res.json({ message: "Order Completed" }))
+    .catch((e) => res.json({ error: `${e}` }));
+})
+
+
+router.get('/userOrder/:username', (req,res)=>{
+  Order.findOne({username: req.params.username})
+  .then(result => res.json(result))
+})
 
 export { router as gamesRouter}

@@ -2,7 +2,7 @@ POST http://localhost:3001/api/games/order
 Content-Type: application/json 
 
 {
-    "creditCardName" : "Lishay",
+    "creditCardName" : "JOHN",
     "orderDetails" : [ {
     "_id": "63fb4cd9230ff245bd87d3aa",
     "title": "One Piece Odyssey",
@@ -20,4 +20,8 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3001/api/games/
+DELETE http://localhost:3001/api/games/deleteOrder/6462059b968a3314bac4b0a8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjYyYjlmZmNhOWE4NTcxNWM1NmUwNiIsImlhdCI6MTY4NDE1MjUyMiwiZXhwIjoxNjg0MjM4OTIyfQ.DvcP4AWGv_8XMPs2C21u0UjR6ooct95WRTlTXWTPuyk
+
+###
+GET http://localhost:3001/api/games/userOrder/lishayst100

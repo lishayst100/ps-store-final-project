@@ -72,6 +72,11 @@ function MainNavbar() {
                       Admin
                     </NavLink>
                   )}
+                  {isAdmin && (
+                    <NavLink className="nav-link" to="/admin/manageOrders">
+                      Manage Orders
+                    </NavLink>
+                  )}
                   <NavLink className="nav-link" to="/cart">
                     <BsCart2 size={"2rem"} />
                     <span>
@@ -92,9 +97,12 @@ function MainNavbar() {
                   )}
 
                   {isLoggedIn && (
-                    <span className="font-bolder">
-                      Hello, {JSON.parse(localStorage.getItem("user")).username}
-                    </span>
+                    <NavLink to="/userOrder">
+                      <span className="font-bolder">
+                        Hello,{" "}
+                        {JSON.parse(localStorage.getItem("user")).username}
+                      </span>
+                    </NavLink>
                   )}
 
                   {!isAdmin && (
