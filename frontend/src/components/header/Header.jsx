@@ -51,7 +51,11 @@ const Header = () => {
           </div>
         )}
 
-        {isLoggedIn && <div className="flex-grow-1"></div>}
+        {isLoggedIn && <div className="flex-grow-1">
+          <h3>
+            Hey {JSON.parse(localStorage.getItem('user')).username} Welcome back!
+            </h3>
+            </div>}
         <a href="#game-list" className="btn btn-primary button">
           See Our Latest Games
         </a>

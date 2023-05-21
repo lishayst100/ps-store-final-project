@@ -56,6 +56,12 @@ In that Page.
 On this page he can see all the games on the site and he can edit a game, add a game and also delete a game.
 As soon as he does one of these actions, he updates the database and updates the entire site
 
+### Order Management
+The admin has the option to see all the orders placed on the site and can also enter each order individually and has a button that confirms that he has sent the order and then the status of the order becomes "delivered"
+
+### User Order
+As soon as the user clicks on his name in the navigation bar, he will navigate to a page where all the orders he made are displayed and they will be sorted by date and he has a button that confirms that he has received the shipment and the status of the order becomes "completed"
+
 
 
  
