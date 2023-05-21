@@ -108,6 +108,16 @@ const Login = () => {
               Email Or Password is incorrect!!!
             </div>
           )}
+          <u>
+            <p
+              onClick={() => {
+                nav("/signup");
+              }}
+            >
+              Not sign in yet, Sign Up
+            </p>
+          </u>
+
           <button type="submit" className="btn btn-primary">
             Login
           </button>

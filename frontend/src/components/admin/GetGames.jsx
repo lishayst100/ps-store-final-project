@@ -39,6 +39,7 @@ const GetGames = () => {
       {games.length === 0 && (<ColorRing/>)}
       {games.length > 0 && (
         <div className="row gap-3 container mx-auto py-5">
+          <h2>Admin Page</h2>
           <button
             onClick={() => {
               nav("/addgame");

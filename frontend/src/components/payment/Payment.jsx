@@ -14,7 +14,8 @@ const Payment = () => {
     const years = [23,24,25,26,27,28,29,30,31,32,33,34]
     const nav =useNavigate()
     const dispatch = useDispatch()
-
+    const date = new Date();
+    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     
 
     const handlePayment = (formValues) => {
@@ -24,7 +25,8 @@ const Payment = () => {
         email: JSON.parse(localStorage.getItem("user")).email,
         orderDetails: cart.cartItems,
         CartTotalAmount: cart.CartTotalAmount,
-        address: formValues.address
+        address: formValues.address,
+        date:formattedDate
       };
 
        fetch("http://localhost:3001/api/games/order", {
@@ -48,14 +50,14 @@ const Payment = () => {
 
 
   return (
-    <div className="containerr">
+    <div className="container">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handlePayment}
       >
         <Form
-          className="bg-light p-4 font-bolder rounded-2 d-flex flex-column gap-3"
+          className="bg-light p-4 font-bolder rounded-2 d-flex flex-column gap-3 container w-75 shadow my-3"
           noValidate
         >
           <div className="card-number d-flex flex-column align-items-start needs-validation">
@@ -144,26 +146,27 @@ const Payment = () => {
             />
           </div>
 
-          <div>
-            <h3>Your Order :</h3>
-            <div className="d-flex gap-3 justify-content-center flex-wrap">
-              {cart.cartItems.map((game) => (
-                <div key={game._id} className="shadow-lg p-3">
-                  <p>{game.title}</p>
-                  
-                  <p>Quantity : {game.cartQuantity}</p>
-                  <p>Total Price : {game.price * game.cartQuantity}$</p>
-                  <img src={game.frontImage} alt="" />
-                </div>
-              ))}
-            </div>
-            <div>Total Price: {cart.CartTotalAmount}$</div>
-            <button className="btn btn-primary" type="submit">
-              Pay Now
-            </button>
-          </div>
+          <div>Total Price: {cart.CartTotalAmount}$</div>
+          <button className="btn btn-primary mx-auto" type="submit">
+            Pay Now
+          </button>
         </Form>
       </Formik>
+
+      <div>
+        <h3>Your Order :</h3>
+        <div className="container mx-auto row">
+          {cart.cartItems.map((game) => (
+            <div key={game._id} className="shadow-lg p-3 col-lg-3 col-md-2">
+              <p>{game.title}</p>
+
+              <p>Quantity : {game.cartQuantity}</p>
+              <p>Total Price : {game.price * game.cartQuantity}$</p>
+              <img src={game.frontImage} alt="" />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

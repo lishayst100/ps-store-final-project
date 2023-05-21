@@ -26,6 +26,7 @@ const UserContextProvider = ({ children }) =>{
     setUsername(undefined);
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    
   };
 
   const adminLogin = (username,email,token) => {

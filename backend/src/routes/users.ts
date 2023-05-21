@@ -10,13 +10,14 @@ import jwt from "jsonwebtoken";
 import authConfig from "../db/config/auth.config.js";
 import { isAdmin } from "../middleware/isAdmin.js";
 
+
 const router = Router();
 
 router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
   const body = _.pick(req.body, "username", "email", "password", "phone");
   body.password = await bcrypt.hash(body.password, 10);
   const user = new User(body);
-
+  
   try {
     user.roles = [await (await Role.findOne({ name: "user" }))._id];
     await user.save();

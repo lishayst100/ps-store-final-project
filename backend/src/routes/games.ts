@@ -6,6 +6,7 @@ import { isAdmin } from "../middleware/isAdmin.js";
 import { Order } from "../db/models/order.js";
 
 
+
 const router = Router()
 
 router.get("/", (req, res) => {
@@ -115,8 +116,11 @@ router.post("/order", (req, res) => {
     "address",
     "CartTotalAmount",
     'username',
-    "email"
+    "email",
+    'date',
+    'status'
   );
+  body.status = 'Pending'  
   new Order(body)
     .save()
     .then((result) => res.json({ message: "Order Completed" }))
@@ -138,8 +142,32 @@ router.delete('/deleteOrder/:id' ,validateToken,isAdmin, (req,res)=>{
 
 
 router.get('/userOrder/:username', (req,res)=>{
-  Order.findOne({username: req.params.username})
+  Order.find({username: req.params.username})
   .then(result => res.json(result))
 })
+
+
+router.get('/userOrderDetails/:id', (req,res)=>{
+  Order.findOne({_id: req.params.id})
+  .then(result => res.json(result))
+})
+
+
+router.put("/updateStatus/:id", validateToken, isAdmin, async (req, res) => {
+  const result = await Order.updateOne(
+    { _id: req.params.id },
+    { $set: { status: "Delivered" } }
+  );
+  res.send(result);
+});
+
+router.put("/completeStatus/:id", async (req, res) => {
+  const result = await Order.updateOne(
+    { _id: req.params.id },
+    { $set: {status: "Completed"} }
+  );
+  res.send(result);
+});
+
 
 export { router as gamesRouter}

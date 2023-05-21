@@ -175,9 +175,6 @@ setTimeout(() => {
             <select
               className="form-select "
               value={platform}
-              onClick={(e) => {
-                console.log(e.target.value);
-              }}
               onChange={(e) => {
                 setPlatform(e.target.value);
               }}
