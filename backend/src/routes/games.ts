@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Game } from "../db/models/gameModel.js";
-import _ from 'underscore'
+import _, { result } from 'underscore'
 import { validateToken } from "../middleware/validateToken.js";
 import { isAdmin } from "../middleware/isAdmin.js";
 import { Order } from "../db/models/order.js";
@@ -133,6 +133,27 @@ router.get('/allOrders', validateToken, isAdmin, (req,res)=> {
     .then((result) => res.json(result))
     .catch((e) => res.json({ error: `${e}` }));
 })
+
+
+
+
+
+router.get("/games", async (req, res) => {
+  const minPrice = parseInt(req.query.minPrice?.toString()) || 0;
+  const maxPrice = parseInt(req.query.maxPrice?.toString()) || Infinity;
+
+  try {
+    const games = await Game.find({
+      price: { $gte: minPrice, $lte: maxPrice },
+    });
+    res.json(games);
+  } catch (error) {
+    console.error("Failed to fetch games:", error);
+    res.status(500).json({ error: "Failed to fetch games" });
+  }
+});
+
+
 
 router.delete('/deleteOrder/:id' ,validateToken,isAdmin, (req,res)=>{
   Order.deleteOne({ _id: req.params.id })

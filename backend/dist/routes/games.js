@@ -88,6 +88,21 @@ router.get('/allOrders', validateToken, isAdmin, (req, res) => {
         .then((result) => res.json(result))
         .catch((e) => res.json({ error: `${e}` }));
 });
+router.get("/games", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const minPrice = parseInt((_a = req.query.minPrice) === null || _a === void 0 ? void 0 : _a.toString()) || 0;
+    const maxPrice = parseInt((_b = req.query.maxPrice) === null || _b === void 0 ? void 0 : _b.toString()) || Infinity;
+    try {
+        const games = yield Game.find({
+            price: { $gte: minPrice, $lte: maxPrice },
+        });
+        res.json(games);
+    }
+    catch (error) {
+        console.error("Failed to fetch games:", error);
+        res.status(500).json({ error: "Failed to fetch games" });
+    }
+}));
 router.delete('/deleteOrder/:id', validateToken, isAdmin, (req, res) => {
     Order.deleteOne({ _id: req.params.id })
         .then((result) => res.json({ message: "Order Completed" }))

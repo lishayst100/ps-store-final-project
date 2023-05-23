@@ -28,6 +28,8 @@ const ListGames = () => {
   const [games, setGames] = useState([]);
   const [showFilters, setShowFilters] = useState(false)
   const [isLoadding, setIsLoadding] = useState(false)
+  const [minPrice, setMinPrice] = useState()
+  const [maxPrice, setMaxPrice] = useState()
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -87,6 +89,13 @@ const ListGames = () => {
     
   }
 
+
+  const handlePriceRange = () => {
+    fetch(`http://localhost:3001/api/games/games?minPrice=${minPrice}&maxPrice=${maxPrice}`)
+    .then(res => res.json())
+    .then(result => setGames(result))
+  }
+
   return (
     <div className=" gap-3 container mx-auto py-5 " id="game-list">
       <div className="d-flex gap-3 justify-content-center flex-column shadow-lg p-4 rounded">
@@ -109,11 +118,11 @@ const ListGames = () => {
               setShowFilters(!showFilters);
             }}
           >
-            {showFilters ? 'Less Filters' : 'More Filters' }
+            {showFilters ? "Less Filters" : "More Filters"}
           </button>
         </div>
-        <div className={showFilters ? 'wrapper open' : 'wrapper'}>
-          <div className="expandable">
+        <div className={showFilters ? "wrapper open" : "wrapper"}>
+          <div className="expandable d-flex flex-column gap-4">
             <label htmlFor="" className="font-bolder">
               Sort Or Filter By
             </label>
@@ -142,6 +151,7 @@ const ListGames = () => {
               >
                 All games
               </button>
+
               <button
                 className="btn btn-outline-primary"
                 onClick={() => {
@@ -157,6 +167,33 @@ const ListGames = () => {
                 }}
               >
                 Price High to Low
+              </button>
+            </div>
+            <div className="d-flex justify-content-center flex-row align-items-center gap-2">
+              <div className="d-flex flex-column align-items-start">
+                <label htmlFor="">Min Price:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  min={0}
+                  onChange={(e) => {
+                    setMinPrice(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="d-flex flex-column align-items-start">
+                <label htmlFor="">Max Price:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  min={1}
+                  onChange={(e) => {
+                    setMaxPrice(e.target.value);
+                  }}
+                />
+              </div>
+              <button onClick={handlePriceRange} className="btn btn-success mt-4">
+                Search
               </button>
             </div>
           </div>

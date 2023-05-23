@@ -24,7 +24,7 @@ DELETE http://localhost:3001/api/games/deleteOrder/6462059b968a3314bac4b0a8
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjYyYjlmZmNhOWE4NTcxNWM1NmUwNiIsImlhdCI6MTY4NDE1MjUyMiwiZXhwIjoxNjg0MjM4OTIyfQ.DvcP4AWGv_8XMPs2C21u0UjR6ooct95WRTlTXWTPuyk
 
 ###
-GET http://localhost:3001/api/games/cart/lishayst100
+GET http://localhost:3001/api/games/games?minPrice=5&maxPrice=50
 
 ####
 PUT http://localhost:3001/api/games/updateStatus/646606c8567f4c4992d48090
